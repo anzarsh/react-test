@@ -3,9 +3,10 @@ import Article from '../Article';
 import './style.css';
 
 function ArticleList({articles}) {
-    const articleElements = articles.map(article => 
+    console.log(articles);
+    const articleElements = articles.map((article, index) => 
         <li key = {article.id} className="article-list__li">
-            <Article article = {article}/>
+            <Article article = {article} defaultOpen = {index === 0}/>
         </li>
     );
     return (

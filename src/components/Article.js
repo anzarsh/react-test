@@ -3,10 +3,34 @@ import React, {Component} from 'react';
 class Article extends Component {
     constructor(props) {
         super(props);
+        
+        console.log('constructor');
 
         this.state = {
-            isOpen: false
+            isOpen: props.defaultOpen
         };
+    }
+
+    componentWillMount() {
+        console.log('componentWillMount');
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProps', nextProps);
+        if(nextProps.defaultOpen !== this.props.defaultOpen) {
+            this.setState({
+                isOpen: nextProps.defaultOpen
+            });
+        }
+    }
+    
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('shouldComponentUpdate');
+        return true;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log('componentWillUpdate');
     }
 
     render() {
@@ -30,6 +54,14 @@ class Article extends Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount(prevProps, prevState) {
+        console.log('componentDidMount');
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log('componentDidUpdate');
     }
 
     handleClick() {
