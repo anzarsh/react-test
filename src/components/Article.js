@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 
-class Article extends Component {
+class Article extends PureComponent {
     constructor(props) {
         super(props);
         
@@ -24,10 +24,9 @@ class Article extends Component {
         }
     }
     
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('shouldComponentUpdate');
-        return true;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return (nextState.isOpen !== this.state.isOpen); 
+    // }
 
     componentWillUpdate(nextProps, nextState) {
         console.log('componentWillUpdate');
