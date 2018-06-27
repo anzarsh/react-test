@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import Article from '../Article';
 import './style.css';
 
-// reverse data flow - обратный поток данных
-// state lifting
+// reverse data flow - обратный поток данных - меняем состояние родителя из дочернего элемента
+// state lifting - вынесение стейта на уровень выше и передача компоненту как проперти
 class ArticleList extends Component {
     constructor(props) {
         super(props);
