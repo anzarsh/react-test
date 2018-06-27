@@ -1,19 +1,41 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Article from '../Article';
 import './style.css';
 
-function ArticleList({articles}) {
-    console.log(articles);
-    const articleElements = articles.map((article, index) => 
-        <li key = {article.id} className="article-list__li">
-            <Article article = {article} defaultOpen = {index === 0}/>
-        </li>
-    );
-    return (
-        <ul>
-            {articleElements}
-        </ul>
-    );
+// reverse data flow - обратный поток данных
+// state lifting
+class ArticleList extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            activeArticleId: null
+        };
+    }
+    render() {
+        const {articles} = this.props;
+        console.log(articles);
+        const articleElements = articles.map((article, index) => 
+            <li key = {article.id} className="article-list__li">
+                <Article 
+                    article = {article}
+                    isOpen = {article.id === this.state.activeArticleId}
+                    onButtonClick = {this.handleClick.bind(this)}  
+                />
+            </li>
+        );
+        return (
+            <ul>
+                {articleElements}
+            </ul>
+        );
+    }
+
+    handleClick(articleId) {
+        this.setState({
+            activeArticleId: articleId === this.state.activeArticleId ? null : articleId 
+        });
+    }
 }
 
 export default ArticleList;

@@ -6,23 +6,23 @@ class Article extends PureComponent {
         
         console.log('constructor');
 
-        this.state = {
-            isOpen: props.defaultOpen
-        };
+        // this.state = {
+        //     isOpen: props.defaultOpen
+        // };
     }
 
     componentWillMount() {
         console.log('componentWillMount');
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log('componentWillReceiveProps', nextProps);
-        if(nextProps.defaultOpen !== this.props.defaultOpen) {
-            this.setState({
-                isOpen: nextProps.defaultOpen
-            });
-        }
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     console.log('componentWillReceiveProps', nextProps);
+    //     if(nextProps.defaultOpen !== this.props.defaultOpen) {
+    //         this.setState({
+    //             isOpen: nextProps.defaultOpen
+    //         });
+    //     }
+    // }
     
     // shouldComponentUpdate(nextProps, nextState) {
     //     return (nextState.isOpen !== this.state.isOpen); 
@@ -33,15 +33,15 @@ class Article extends PureComponent {
     }
 
     render() {
-        const {article} = this.props;
-        const body = this.state.isOpen && <section className="card-text">{article.text}</section>;
+        const {article, isOpen, onButtonClick} = this.props;
+        const body = isOpen && <section className="card-text">{article.text}</section>;
         return (
             <div className="card m-x-auto" style = {{width: '50%'}}>
                 <div className="card-header">
                     <h2>
                         {article.title}
-                        <button onClick = {() => this.handleClick()} className="btn btn-primary btn-lg pull-xs-right">
-                            {this.state.isOpen ? 'close' : 'open'}
+                        <button onClick = {() => onButtonClick(article.id)} className="btn btn-primary btn-lg pull-xs-right">
+                            {isOpen ? 'close' : 'open'}
                         </button>
                     </h2>
                 </div>
@@ -63,11 +63,11 @@ class Article extends PureComponent {
         console.log('componentDidUpdate');
     }
 
-    handleClick() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
+    // handleClick() {
+    //     this.setState({
+    //         isOpen: !this.state.isOpen
+    //     });
+    // }
 }
 
 export default Article;
